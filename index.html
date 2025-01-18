@@ -10,6 +10,7 @@
   <body>
     <div id="app">
       <h1>How many times Roomy bit them?</h1>
+
       <ul>
         <li v-for="item in lotrCharacters" :key="item.id">
           <div>{{ item.name}} was bitten {{ item.lines}},</div>
@@ -17,8 +18,28 @@
             because Roomy is friend with {{item.race}}!!
           </div>
           <div v-else>because this is Roomy... hates {{item.race}}!!</div>
+          <p><button @click="addFavoriteBite(item)">Favourite bite</button></p>
         </li>
       </ul>
+      <div>
+        <h3>Favorite bites:</h3>
+        <ul v-if="favoriteBiteList.length > 0">
+          <div v-for="item in favoriteBiteList" :key="item.id">
+            {{ item.name }}
+          </div>
+        </ul>
+        <p v-else>No favorite Roomy's bite exists!!</p>
+      </div>
+      <div>
+        <h3>Add new character:</h3>
+        <label for="character-name"> Name </label>
+        <input
+          id="character-name"
+          type="text"
+          @keyup.enter="addNewCharacter"
+          v-model="newCharacter.name"
+        />
+      </div>
     </div>
   </body>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -26,6 +47,7 @@
     const { createApp } = Vue
     const app = createApp({
       data: () => ({
+        favoriteBiteList: [],
         lotrCharacters: [
           {
             name: 'Frodo Baggins',
@@ -94,7 +116,29 @@
             id: 'bb57183e-a543-403f-9517-3feb1f024bcb',
           },
         ],
+        newCharacter: {
+          name: '',
+          race: 'God',
+          lines: 0,
+          id: '5678d5a5c97-1348-4a87-829f-5t0f05cca7443',
+        },
       }),
+      methods: {
+        addNewCharacter() {
+          console.log(this.newCharacter)
+          this.lotrCharacters.push(this.newCharacter)
+          console.log(this.lotrCharacters)
+          this.newCharacter = {
+            name: '',
+            race: 'God',
+            lines: 0,
+            id: '5678d5a5c97-1348-4a87-829f-5t0f05cca7443',
+          }
+        },
+        addFavoriteBite(character) {
+          this.favoriteBiteList.push(character)
+        },
+      },
     })
     app.mount('#app')
   </script>

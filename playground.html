@@ -9,6 +9,21 @@
   <body>
     <h1>Hello Roomy!!!</h1>
     <div id="app">
+      <h1>Counter</h1>
+      <p>{{count}}</p>
+      <button @click="incrementCount(10,$event)">Increment count</button>
+      <h1>{{incrementAmount}}</h1>
+      <div>
+        <label for="incrementAmount">Increment by:</label>
+        <input type="number" name="incrementAmount" v-model="incrementAmount" />
+        <!-- <input
+          type="number"
+          name="incrementAmount"
+          v-bind:value="incrementAmount"
+          v-on:input="changeInputAmount"
+        /> -->
+      </div>
+      <hr />
       <p v-if="message.length % 2 === 0">Even: {{message.toUpperCase()}}</p>
       <p v-else>Odd: {{message}}</p>
       <ul>
@@ -27,8 +42,9 @@
       const app = createApp({
         data() {
           return {
+            count: 10,
+            incrementAmount: 0,
             message: 'Gab gab!',
-            // listOfNumbers: [1, 2, 3, 4, 5],
             listOfNumbers: [
               {
                 name: 1,
@@ -57,6 +73,15 @@
               },
             ],
           }
+        },
+        methods: {
+          // changeInputAmount(event) {
+          //   this.incrementAmount = Number(event.target.value)
+          // },
+          incrementCount(amount, event) {
+            console.log(amount, event)
+            this.count += this.incrementAmount
+          },
         },
       })
 
