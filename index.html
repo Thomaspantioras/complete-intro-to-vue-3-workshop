@@ -4,7 +4,98 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Lord of the Rings</title>
   </head>
-  <body></body>
+
+  <body>
+    <div id="app">
+      <h1>How many times Roomy bit them?</h1>
+      <ul>
+        <li v-for="item in lotrCharacters" :key="item.id">
+          <div>{{ item.name}} was bitten {{ item.lines}},</div>
+          <div v-if="item.lines == 0">
+            because Roomy is friend with {{item.race}}!!
+          </div>
+          <div v-else>because this is Roomy... hates {{item.race}}!!</div>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue
+    const app = createApp({
+      data: () => ({
+        lotrCharacters: [
+          {
+            name: 'Frodo Baggins',
+            race: 'Hobbit',
+            lines: 688,
+            id: '6d5a5c97-1428-4a8e-809f-10f05cca7424',
+          },
+          {
+            name: 'Aragorn',
+            race: 'Human',
+            lines: 1201,
+            id: '5c421b73-2c19-40bb-ab20-062d3824a9fa',
+          },
+          {
+            name: 'Gandalf',
+            race: 'Maia',
+            lines: 1006,
+            id: '20937dd9-57ca-4f31-86cf-da691b8a9536',
+          },
+          {
+            name: 'Legolas',
+            race: 'Elf',
+            lines: 526,
+            id: '666042be-94e3-4f64-a7f0-ee3bee66fad3',
+          },
+          {
+            name: 'Gimli',
+            race: 'Dwarf',
+            lines: 274,
+            id: '02c7a8e8-0340-4a88-9fea-17730f7ec704',
+          },
+          {
+            name: 'Samwise Gamgee',
+            race: 'Hobbit',
+            lines: 1020,
+            id: '19538973-8ce8-4686-a962-4949a1ec1e0a',
+          },
+          {
+            name: 'Boromir',
+            race: 'Human',
+            lines: 260,
+            id: 'a2d8b847-aaa4-4e03-80e1-dd983ea42cff',
+          },
+          {
+            name: 'Gollum',
+            race: 'Hobbit',
+            lines: 247,
+            id: '290d0b3f-a086-40c6-9d91-c1f660777903',
+          },
+          {
+            name: 'Gwaihir',
+            race: 'Eagle',
+            lines: 0,
+            id: '9163f2a6-8799-427b-8402-c4ab8edc6f93',
+          },
+          {
+            name: 'Crebain',
+            race: 'Crow',
+            lines: 0,
+            id: '3c66be98-df5a-4406-8fbf-6e2db36de73f',
+          },
+          {
+            name: 'Fellbeast',
+            race: 'Winged Creature',
+            lines: 0,
+            id: 'bb57183e-a543-403f-9517-3feb1f024bcb',
+          },
+        ],
+      }),
+    })
+    app.mount('#app')
+  </script>
 </html>
