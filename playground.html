@@ -6,5 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playground — Complete Intro to Vue 3</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Hello Roomy!!!</h1>
+    <div id="app">
+      <p v-if="message.length % 2 === 0">Even: {{message.toUpperCase()}}</p>
+      <p v-else>Odd: {{message}}</p>
+      <ul>
+        <li v-for="number in listOfNumbers" :key="number">
+          {{ number.id }}
+          <ul>
+            <li v-for="item in number.items" :key="item">{{ item }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+        data() {
+          return {
+            message: 'Gab gab!',
+            // listOfNumbers: [1, 2, 3, 4, 5],
+            listOfNumbers: [
+              {
+                name: 1,
+                id: '54cc42fd-463e-4493-a665-998ce45525a7',
+                items: [1, 2, 3, 4, 5],
+              },
+              {
+                name: 2,
+                id: '0928dfc9-2de1-4eed-8333-b2a429afee56',
+                items: [1, 2, 3, 4, 5],
+              },
+              {
+                name: 3,
+                id: 'dd0d861f-3a11-4215-9327-2ce553092243',
+                items: [1, 2, 3, 4, 5],
+              },
+              {
+                name: 4,
+                id: 'b10198ec-6992-42c9-9175-e6cb42789967',
+                items: [1, 2, 3, 4, 5],
+              },
+              {
+                name: 5,
+                id: '729b34cd-4607-4f73-8436-de8c862433a3',
+                items: [1, 2, 3, 4, 5],
+              },
+            ],
+          }
+        },
+      })
+
+      app.mount('#app')
+    </script>
+  </body>
 </html>
