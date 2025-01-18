@@ -9,13 +9,20 @@
   <body>
     <h1>Hello Roomy!!!</h1>
     <div id="app">
-      <h1>Counter</h1>
+      <!-- <h1>{{counterTitle}}</h1> -->
+      <h1>{{displayTitle}}</h1>
       <p>{{count}}</p>
       <button @click="incrementCount(10,$event)">Increment count</button>
       <h1>{{incrementAmount}}</h1>
+      <h4>{{optimisedIncrementAmount}}</h4>
       <div>
         <label for="incrementAmount">Increment by:</label>
-        <input type="number" name="incrementAmount" v-model="incrementAmount" />
+        <input
+          id="incrementAmount"
+          type="number"
+          name="incrementAmount"
+          v-model="incrementAmount"
+        />
         <!-- <input
           type="number"
           name="incrementAmount"
@@ -42,6 +49,7 @@
       const app = createApp({
         data() {
           return {
+            counterTitle: 'Counter',
             count: 10,
             incrementAmount: 0,
             message: 'Gab gab!',
@@ -74,13 +82,31 @@
             ],
           }
         },
+        computed: {
+          displayTitle() {
+            if (this.count > 20) {
+              return 'Counter Standard - Very long'
+            } else {
+              return 'Counter Standard'
+            }
+          },
+          optimisedIncrementAmount() {
+            return this.displayTitle.length * this.incrementAmount
+          },
+        },
         methods: {
           // changeInputAmount(event) {
           //   this.incrementAmount = Number(event.target.value)
           // },
           incrementCount(amount, event) {
-            console.log(amount, event)
             this.count += this.incrementAmount
+          },
+        },
+        watch: {
+          count(newValue) {
+            if (newValue > 20) {
+              this.counterTitle += '- Too Long'
+            }
           },
         },
       })
