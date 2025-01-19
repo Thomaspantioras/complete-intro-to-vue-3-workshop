@@ -9,6 +9,12 @@
 
   <body>
     <div id="app">
+      <h1>Statistics</h1>
+      <ul>
+        <li v-for="(stat, type) in behaviourStatistics" :key="stat">
+          {{type}}: {{ stat }}
+        </li>
+      </ul>
       <h1>How many times Roomy bit them?</h1>
 
       <ul>
@@ -54,66 +60,49 @@
             race: 'Hobbit',
             lines: 688,
             id: '6d5a5c97-1428-4a8e-809f-10f05cca7424',
+            element: ['idiot', 'stubborn', 'impolite'],
           },
           {
             name: 'Aragorn',
             race: 'Human',
             lines: 1201,
             id: '5c421b73-2c19-40bb-ab20-062d3824a9fa',
+            element: ['egoistic', 'stubborn'],
           },
           {
             name: 'Gandalf',
             race: 'Maia',
             lines: 1006,
             id: '20937dd9-57ca-4f31-86cf-da691b8a9536',
+            element: ['nerd', 'idiot'],
           },
           {
             name: 'Legolas',
             race: 'Elf',
             lines: 526,
             id: '666042be-94e3-4f64-a7f0-ee3bee66fad3',
+            element: ['slobbery', 'nerd', 'stubborn', 'idiot'],
           },
           {
             name: 'Gimli',
             race: 'Dwarf',
             lines: 274,
             id: '02c7a8e8-0340-4a88-9fea-17730f7ec704',
-          },
-          {
-            name: 'Samwise Gamgee',
-            race: 'Hobbit',
-            lines: 1020,
-            id: '19538973-8ce8-4686-a962-4949a1ec1e0a',
-          },
-          {
-            name: 'Boromir',
-            race: 'Human',
-            lines: 260,
-            id: 'a2d8b847-aaa4-4e03-80e1-dd983ea42cff',
+            element: ['slobbery', 'nerd', 'stubborn', 'egoistic'],
           },
           {
             name: 'Gollum',
             race: 'Hobbit',
             lines: 247,
             id: '290d0b3f-a086-40c6-9d91-c1f660777903',
+            element: ['slobbery'],
           },
           {
             name: 'Gwaihir',
             race: 'Eagle',
             lines: 0,
             id: '9163f2a6-8799-427b-8402-c4ab8edc6f93',
-          },
-          {
-            name: 'Crebain',
-            race: 'Crow',
-            lines: 0,
-            id: '3c66be98-df5a-4406-8fbf-6e2db36de73f',
-          },
-          {
-            name: 'Fellbeast',
-            race: 'Winged Creature',
-            lines: 0,
-            id: 'bb57183e-a543-403f-9517-3feb1f024bcb',
+            element: ['butterfly'],
           },
         ],
         newCharacter: {
@@ -121,8 +110,38 @@
           race: 'God',
           lines: 0,
           id: '5678d5a5c97-1348-4a87-829f-5t0f05cca7443',
+          element: ['butterfly'],
         },
       }),
+      computed: {
+        behaviourStatistics() {
+          const elements = [
+            'idiot',
+            'stubborn',
+            'impolite',
+            'egoistic',
+            'slobbery',
+            'butterfly',
+          ]
+          const behaviorStatistic = {
+            idiot: 0,
+            stubborn: 0,
+            impolite: 0,
+            egoistic: 0,
+            slobbery: 0,
+            butterfly: 0,
+          }
+
+          this.lotrCharacters.forEach((character) => {
+            elements.forEach((element) => {
+              if (character.element.includes(element)) {
+                behaviorStatistic[element] += 1
+              }
+            })
+          })
+          return behaviorStatistic
+        },
+      },
       methods: {
         addNewCharacter() {
           console.log(this.newCharacter)
