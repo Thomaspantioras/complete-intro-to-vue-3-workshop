@@ -2,12 +2,14 @@
 import BaseStatistics from "./Components/BaseStatistics.vue";
 import BaseCharacters from "./Components/BaseCharacters.vue";
 import BaseNewCharacter from "./Components/BaseNewCharacter.vue";
+import BaseLayout from "./Components/BaseLayout.vue";
 
 export default {
   components: {
     BaseStatistics,
     BaseCharacters,
     BaseNewCharacter,
+    BaseLayout,
   },
   data: () => ({
     characterList: [
@@ -40,7 +42,11 @@ export default {
 </script>
 
 <template>
+  <BaseLayout>
+    <template v-slot:two>
+      <BaseNewCharacter :character-list="characterList" />
+    </template>
+  </BaseLayout>
   <BaseStatistics :character-list="characterList" />
   <BaseCharacters :character-list="characterList" />
-  <BaseNewCharacter :character-list="characterList" />
 </template>
