@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  props: ["favoriteList"],
+  props: {
+    favoriteList: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {};
   },

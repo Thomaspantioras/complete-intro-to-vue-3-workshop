@@ -15,7 +15,16 @@
 
 <script>
 export default {
-  props: ["characterList", "favoriteList"],
+  props: {
+    characterList: {
+      type: Array,
+      required: true,
+    },
+    favoriteList: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {};
   },

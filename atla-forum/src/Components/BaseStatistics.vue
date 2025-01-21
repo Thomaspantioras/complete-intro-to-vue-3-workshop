@@ -12,7 +12,12 @@
 
 <script>
 export default {
-  props: ["characterList"],
+  props: {
+    characterList: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {};
   },
