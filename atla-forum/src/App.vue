@@ -2,14 +2,12 @@
 import BaseStatistics from "./Components/BaseStatistics.vue";
 import BaseCharacters from "./Components/BaseCharacters.vue";
 import BaseNewCharacter from "./Components/BaseNewCharacter.vue";
-import BaseFavoriteCharacters from "./Components/BaseFavoriteCharacters.vue";
 
 export default {
   components: {
     BaseStatistics,
     BaseCharacters,
     BaseNewCharacter,
-    BaseFavoriteCharacters,
   },
   data: () => ({
     characterList: [
@@ -30,7 +28,6 @@ export default {
         element: ["Water"],
       },
     ],
-    favoriteList: [],
   }),
 
   methods: {
@@ -44,10 +41,6 @@ export default {
 
 <template>
   <BaseStatistics :character-list="characterList" />
-  <BaseCharacters
-    :character-list="characterList"
-    :favorite-list="favoriteList"
-  />
-  <BaseFavoriteCharacters :favorite-list="favoriteList" />
+  <BaseCharacters :character-list="characterList" />
   <BaseNewCharacter :character-list="characterList" />
 </template>
