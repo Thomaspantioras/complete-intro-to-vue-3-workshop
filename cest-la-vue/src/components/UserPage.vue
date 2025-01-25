@@ -1,32 +1,37 @@
 <script>
 // import { v4 as uuidv4 } from 'uuid';
 import UserCard from "./UserCard.vue";
+import { reactive } from "vue";
 export default {
   components: {
     UserCard,
   },
+  async setup() {
+    const state = reactive({
+      usersList: [],
+    });
+
+    const fetchUsers = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      ).then((response) => response.json());
+
+      return response;
+    };
+
+    state.usersList = await fetchUsers();
+
+    return {
+      state,
+      fetchUsers,
+    };
+  },
+
   data: () => ({
-    usersList: [],
     newUser: {
       name: "Ben",
     },
   }),
-  methods: {
-    // addNewUser() {
-    //   this.usersList.push({
-    //     ...this.newUser,
-    //     id: uuidv4()
-    //   })
-    // },
-    async fetchUsers() {
-      this.usersList = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      ).then((response) => response.json());
-    },
-  },
-  created() {
-    this.fetchUsers();
-  },
 };
 </script>
 
@@ -35,7 +40,7 @@ export default {
     <h1>Users</h1>
     <ul>
       <UserCard
-        v-for="user in usersList"
+        v-for="user in state.usersList"
         :key="`user-${user.id}`"
         :user="user"
       />
