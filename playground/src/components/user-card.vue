@@ -1,5 +1,12 @@
 <script>
+import { useCount } from "../composables/countStore";
 export default {
+  setup() {
+    const countStore = useCount();
+    return {
+      countStore,
+    };
+  },
   props: {
     user: {
       type: Object,
@@ -17,6 +24,13 @@ export default {
 
 <template>
   <h1>User: {{ user.name }}</h1>
+  <!-- <h2>Global count: {{ globalCount }}</h2> -->
   <p>Favorite Food: {{ user.food }}</p>
   <button @click="tellParentChangeName">Change Name</button>
+  <h2>New counter</h2>
+  <p>Global count: {{ countStore.globalCount }}</p>
+  <p>local count: {{ countStore.localCount }}</p>
+  <button @click="countStore.incrementGlobalCount">Global</button>
+  <button @click="countStore.incrementLocalCount">local</button>
+  <hr />
 </template>
