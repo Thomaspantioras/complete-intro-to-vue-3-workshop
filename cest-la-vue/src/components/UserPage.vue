@@ -1,7 +1,8 @@
 <script setup>
 // import { v4 as uuidv4 } from 'uuid';
 import UserCard from "./UserCard.vue";
-import { defineEmits, defineProps, reactive } from "vue";
+import { defineEmits, defineProps } from "vue";
+import { usersList } from "../composables/useUserStore";
 
 defineEmits("update-usersList");
 defineProps({
@@ -9,9 +10,6 @@ defineProps({
     type: String,
     default: "Users",
   },
-});
-const state = reactive({
-  usersList: [],
 });
 
 const fetchUsers = async () => {
@@ -22,7 +20,7 @@ const fetchUsers = async () => {
   return response;
 };
 
-state.usersList = await fetchUsers();
+usersList.value = await fetchUsers();
 </script>
 
 <template>
@@ -30,7 +28,7 @@ state.usersList = await fetchUsers();
     <h1>{{ title }}</h1>
     <ul>
       <UserCard
-        v-for="user in state.usersList"
+        v-for="user in usersList"
         :key="`user-${user.id}`"
         :user="user"
       />
