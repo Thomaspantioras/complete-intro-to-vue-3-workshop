@@ -39,11 +39,13 @@ export default {
   <h2>New counter</h2>
   <p>Global count: {{ countStore.globalCount }}</p>
   <p>local count: {{ countStore.localCount }}</p>
-  <button @click="countStore.incrementGlobalCount">Global</button>
-  <button @click="countStore.incrementLocalCount">local</button>
+  <button class="button" @click="countStore.incrementGlobalCount">
+    Global
+  </button>
+  <button class="button" @click="countStore.incrementLocalCount">local</button>
   <hr />
   <p :data-increment-by="incrementAmount">{{ count }}</p>
-  <button @click="incrementCount">Increment Count</button>
+  <button class="button" @click="incrementCount">Increment Count</button>
   <h1>{{ incrementAmount }}</h1>
   <p>{{ optimizedIncrementAmount }}</p>
   <div>
@@ -51,3 +53,9 @@ export default {
     <input type="text" v-model="incrementAmount" />
   </div>
 </template>
+
+<style>
+.button {
+  border: 5px solid red;
+}
+</style>

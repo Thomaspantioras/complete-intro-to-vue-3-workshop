@@ -3,8 +3,13 @@ import UserCard from "./components/user-card.vue";
 import BaseCounter from "./components/base-counter.vue";
 import BaseButton from "./components/base-button.vue";
 import BaseLayout from "./components/base-layout.vue";
+import { ref } from "vue";
 
 export default {
+  setup() {
+    const colorPreference = ref("#fbeccb");
+    return { colorPreference };
+  },
   components: {
     BaseButton,
     BaseCounter,
@@ -66,16 +71,20 @@ export default {
 </script>
 
 <template>
-  <BaseLayout>
-    <template v-slot:sidebar> Aside </template>
-    <template v-slot:main>
-      <UserCard :user="refinedUserData" @change-name="changeName" />
-    </template>
-    <template v-slot:footer>
-      <BaseCounter />
-    </template>
-  </BaseLayout>
-  <BaseButton :left="true"></BaseButton>
+  <div class="wrapper">
+    <h2>{{ colorPreference }}</h2>
+    <input type="color" v-model="colorPreference" />
+    <BaseLayout>
+      <template v-slot:sidebar> Aside </template>
+      <template v-slot:main>
+        <UserCard :user="refinedUserData" @change-name="changeName" />
+      </template>
+      <template v-slot:footer>
+        <BaseCounter />
+      </template>
+    </BaseLayout>
+    <BaseButton :left="true"></BaseButton>
+  </div>
 
   <hr />
   <p v-if="message.length % 2 === 0">Even: {{ message.toUpperCase() }}</p>
@@ -91,3 +100,17 @@ export default {
     </li>
   </ul>
 </template>
+
+<style>
+html {
+  background-color: papayawhip;
+}
+
+.button {
+  border: 10px solid rgb(132, 74, 74) !important;
+}
+
+.wrapper {
+  background-color: v-bind(colorPreference);
+}
+</style>
