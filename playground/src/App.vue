@@ -3,12 +3,23 @@ import UserCard from "./components/user-card.vue";
 import BaseCounter from "./components/base-counter.vue";
 import BaseButton from "./components/base-button.vue";
 import BaseLayout from "./components/base-layout.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useCount } from "@/composables/countStore";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const colorPreference = ref("#fbeccb");
-    return { colorPreference };
+    const countStore = useCount();
+    const router = useRouter();
+
+    watch(countStore.globalCount, (newValue) => {
+      if (newValue > 250) {
+        router.push("/pokedex");
+      }
+    });
+
+    return { colorPreference, countStore };
   },
   components: {
     BaseButton,
@@ -76,7 +87,9 @@ export default {
     <RouterLink to="/pokedex">Pokedx </RouterLink>
   </nav>
   <RouterView />
+
   <div class="wrapper">
+    <h2>{{ countStore.globalCount }}</h2>
     <h2>{{ colorPreference }}</h2>
     <input type="color" v-model="colorPreference" />
     <BaseLayout>
