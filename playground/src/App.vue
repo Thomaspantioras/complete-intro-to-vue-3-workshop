@@ -84,7 +84,7 @@ export default {
 <template>
   <nav>
     <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/pokedex">Pokedx </RouterLink>
+    <RouterLink to="/pokedex">Pokedex</RouterLink>
   </nav>
   <RouterView />
 
