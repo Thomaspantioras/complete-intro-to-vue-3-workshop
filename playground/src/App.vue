@@ -71,6 +71,11 @@ export default {
 </script>
 
 <template>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/pokedex">Pokedx </RouterLink>
+  </nav>
+  <RouterView />
   <div class="wrapper">
     <h2>{{ colorPreference }}</h2>
     <input type="color" v-model="colorPreference" />
