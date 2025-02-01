@@ -1,36 +1,16 @@
 import { createApp } from "vue";
 import App from "@/App.vue";
-// import { routes } from "./routes";
+import { routes } from "./routes";
 import { createRouter, createWebHashHistory } from "vue-router";
-
-// const routes = [
-//   { path: "/", component: () => import("@/views/HomeView.vue") },
-//   { path: "/login", component: () => import("@/views/HomeView.vue") },
-//   { path: "/user", component: () => import("@/views/HomeView.vue") },
-// ];
+import { createPinia } from "pinia";
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [
-    {
-      path: "/",
-      component: () => import("@/views/HomeView.vue"),
-    },
-    {
-      path: "/login",
-      component: () => import("@/views/LoginView.vue"),
-    },
-    {
-      path: "/user",
-      component: () => import("@/views/UserView.vue"),
-    },
-    {
-      path: "/user/:name",
-      component: () => import("@/views/UserDetailsView.vue"),
-    },
-  ],
+  routes,
 });
 
 const app = createApp(App);
+const pinia = createPinia();
 app.use(router);
+app.use(pinia);
 app.mount("#app");

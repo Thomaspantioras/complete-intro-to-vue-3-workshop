@@ -2,8 +2,8 @@
 // import { v4 as uuidv4 } from 'uuid';
 import UserCard from "@/components/UserCard.vue";
 import { defineEmits, defineProps } from "vue";
-import { usersList } from "@/composables/useUserStore";
-
+// import { usersList } from "@/composables/useUserStore";
+import { useUserStore } from "@/stores/UserStore";
 defineEmits("update-usersList");
 defineProps({
   title: {
@@ -12,15 +12,8 @@ defineProps({
   },
 });
 
-const fetchUsers = async () => {
-  const response = await fetch(
-    "https://jsonplaceholder.typicode.com/users"
-  ).then((response) => response.json());
-
-  return response;
-};
-
-usersList.value = await fetchUsers();
+const userStore = useUserStore();
+userStore.fetchUsers();
 </script>
 
 <template>
@@ -28,7 +21,7 @@ usersList.value = await fetchUsers();
     <h1>{{ title }}</h1>
     <ul>
       <UserCard
-        v-for="user in usersList"
+        v-for="user in userStore.userList"
         :key="`user-${user.id}`"
         :user="user"
       />

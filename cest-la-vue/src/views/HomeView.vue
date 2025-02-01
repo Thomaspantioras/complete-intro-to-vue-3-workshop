@@ -1,10 +1,13 @@
 <script setup>
-import { usersList } from "@/composables/useUserStore";
-import { computed } from "vue";
+import { useUserStore } from "@/stores/UserStore";
+// import { usersList } from "@/composables/useUserStore";
+// import { computed } from "vue";
 
-const sortUserList = computed(() => {
-  return usersList.value.splice(0, 5);
-});
+// const sortUserList = computed(() => {
+//   return usersList.value.splice(0, 5);
+// });
+
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const sortUserList = computed(() => {
     </p>
     <hr />
     <ul>
-      <li v-for="user in sortUserList" :key="`user-${user.id}`" :user="user">
+      <li v-for="user in userStore.sortUserList" :key="`user-${user.id}`">
         {{ user.name }}
       </li>
     </ul>
